@@ -19,21 +19,26 @@
       height: 100%;
       margin: 0;
       font-family: "Poppins", sans-serif;
-      overflow: hidden; /* remove vertical scrollbar */
+      overflow-x: hidden; /* prevent horizontal scroll */
     }
 
     .bg-cover {
       background: url('img/IMG_20250904_120633.jpg') no-repeat center center/cover;
       min-height: 100vh;
-      height: calc(var(--vh, 1vh) * 100); /* mobile viewport fix */
-      position: relative;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      position: relative;
       color: #fff;
       text-align: center;
-      flex-direction: column;
-      overflow: hidden; /* safety */
+    }
+
+    /* Mobile fix: dynamic vh */
+    @media (max-width: 768px) {
+      .bg-cover {
+        min-height: 100dvh; /* fills visible mobile viewport */
+      }
     }
 
     .overlay {
@@ -45,13 +50,13 @@
     .content {
       position: relative;
       z-index: 1;
-      margin: auto;
       padding: 50px 20px 20px;
       width: 100%;
-      min-height: 100%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
     }
 
     .logo {
@@ -72,17 +77,11 @@
     }
 
     @media (max-width: 992px) {
-      p.lead2 {
-        font-size: 2.4rem;
-        letter-spacing: 1.5px;
-      }
+      p.lead2 { font-size: 2.4rem; }
     }
 
     @media (max-width: 576px) {
-      p.lead2 {
-        font-size: 1.8rem;
-        letter-spacing: 1px;
-      }
+      p.lead2 { font-size: 1.8rem; }
     }
 
     p.lead {
@@ -123,9 +122,13 @@
     }
 
     footer {
+      position: relative;
+      z-index: 1;
       font-size: 0.95rem;
       color: #ddd;
-      margin-top: auto;
+      text-align: center;
+      padding: 15px 0;
+      width: 100%;
     }
   </style>
 </head>
@@ -133,8 +136,8 @@
 
   <div class="bg-cover">
     <div class="overlay"></div>
+
     <div class="container-fluid content">
-      
       <!-- Logo -->
       <img src="img/Logo-01.jpg" alt="INNOV 8 DEZIGN Logo" class="logo">
 
@@ -147,22 +150,15 @@
         <div><span id="minutes">00</span><small>Minutes</small></div>
         <div><span id="seconds">00</span><small>Seconds</small></div>
       </div>
-
-      <footer>&copy; <span id="year"></span> Powered by Design Concepts</footer>
     </div>
+
+    <footer>&copy; <span id="year"></span> Powered by Design Concepts</footer>
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Fix 100vh issue on mobile
-    function setVh() {
-      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-    }
-    window.addEventListener('resize', setVh);
-    setVh();
-
     let countdownDate;
 
     if (localStorage.getItem("countdownDate")) {
