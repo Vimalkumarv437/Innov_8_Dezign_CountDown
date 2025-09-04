@@ -34,7 +34,6 @@
       text-align: center;
     }
 
-    /* Mobile fix: dynamic vh */
     @media (max-width: 768px) {
       .bg-cover {
         min-height: 100dvh; /* fills visible mobile viewport */
@@ -85,20 +84,21 @@
     }
 
     p.lead {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
       font-weight: 300;
       line-height: 1.6;
       margin-bottom: 2.5rem;
       color: #e2e2e2;
     }
 
+    /* Desktop countdown style */
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
       margin-top: 40px;
       margin-bottom: 2.5rem;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* desktop can wrap if needed */
     }
 
     .countdown div {
@@ -119,6 +119,29 @@
       text-transform: uppercase;
       color: #e2e2e2;
       letter-spacing: 1px;
+    }
+
+    /* Mobile-only countdown adjustments */
+    @media (max-width: 576px) {
+      .countdown {
+        flex-wrap: nowrap; /* keep horizontal */
+        justify-content: space-between;
+        width: 100%;
+        gap: 0.5rem;
+      }
+
+      .countdown div {
+        flex: 1 1 0;
+        min-width: 50px;
+      }
+
+      .countdown div span {
+        font-size: 2rem;
+      }
+
+      .countdown div small {
+        font-size: 0.75rem;
+      }
     }
 
     footer {
